@@ -359,7 +359,13 @@ extension ITunes: Codable {
     try container.encodeIfPresent(block, forKey: CodingKeys.block)
     try container.encodeIfPresent(categories, forKey: CodingKeys.categories)
     try container.encodeIfPresent(image, forKey: CodingKeys.image)
-    try container.encodeIfPresent(duration, forKey: CodingKeys.duration)
+    try container.encodeIfPresent(
+        {
+            guard let duration else { return nil }
+            return Int(duration)
+        }(),
+        forKey: CodingKeys.duration
+    )
     try container.encodeIfPresent(explicit, forKey: CodingKeys.explicit)
     try container.encodeIfPresent(isClosedCaptioned, forKey: CodingKeys.isClosedCaptioned)
     try container.encodeIfPresent(order, forKey: CodingKeys.order)
