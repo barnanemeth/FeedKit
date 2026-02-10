@@ -1,7 +1,7 @@
 //
 // FeedNamespace.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -57,6 +57,12 @@ enum FeedNamespace: CaseIterable {
   /// Represents the Atom feed namespace, typically used for syndication
   /// in the Atom format.
   case atom
+  /// Represents the Podcast namespace, used for podcast-specific metadata
+  /// and extensions in podcast feeds.
+  case podcast
+  /// Represents the source namespace, used for Source-specific metadata
+  /// like markdown content.
+  case source
 
   // MARK: Internal
 
@@ -81,6 +87,10 @@ enum FeedNamespace: CaseIterable {
       "xmlns:yt"
     case .atom:
       "xmlns:atom"
+    case .podcast:
+      "xmlns:podcast"
+    case .source:
+      "xmlns:source"
     }
   }
 
@@ -105,6 +115,10 @@ enum FeedNamespace: CaseIterable {
       "http://www.youtube.com/xml/schemas/2015"
     case .atom:
       "http://www.w3.org/2005/Atom"
+    case .podcast:
+      "https://podcastindex.org/namespace/1.0"
+    case .source:
+      "http://source.scripting.com/"
     }
   }
 }
@@ -135,7 +149,7 @@ extension FeedNamespace {
       feed.channel?.items?.contains(where: { $0.content != nil }) ?? false
 
     case .georss:
-      feed.channel?.items?.contains(where: { $0.media?.location?.geoRSS != nil }) ?? false
+      feed.channel?.items?.contains(where: { $0.media?.location?.geoRSS != nil || $0.geoRSS != nil }) ?? false
 
     case .gml:
       feed.channel?.items?.contains(where: { $0.media?.location?.geoRSS?.gmlPoint != nil }) ?? false
@@ -145,6 +159,13 @@ extension FeedNamespace {
 
     case .atom:
       feed.channel?.atom != nil
+
+    case .podcast:
+      feed.channel?.podcast != nil ||
+        feed.channel?.items?.contains(where: { $0.podcast != nil }) ?? false
+
+    case .source:
+      feed.channel?.items?.contains(where: { $0.markdown != nil }) ?? false
     }
   }
 
@@ -155,6 +176,8 @@ extension FeedNamespace {
     switch self {
     case .youTube:
       feed.entries?.contains(where: { $0.youTube != nil }) ?? false
+    case .georss:
+      feed.entries?.contains(where: { $0.geoRSS != nil }) ?? false
     default:
       false
     }

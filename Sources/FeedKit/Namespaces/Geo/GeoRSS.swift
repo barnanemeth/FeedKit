@@ -1,7 +1,7 @@
 //
 // GeoRSS.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +34,12 @@ public struct GeoRSS {
     self.gmlPoint = gmlPoint
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A point consists of a GML <Point> element with a child <pos> element.
   /// Within<pos> the latitude and longitude coordinate values are separated
   /// by a space.
-  var gmlPoint: GMLPoint?
+  public var gmlPoint: GMLPoint?
 }
 
 // MARK: - Sendable

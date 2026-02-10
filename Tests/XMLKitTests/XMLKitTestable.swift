@@ -1,7 +1,7 @@
 //
 // XMLKitTestable.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -65,8 +65,7 @@ extension XMLKitTestable {
       fatalError("Error: Could not find file \(resource).\(ext) in bundle.")
     }
     do {
-      let string = try String(contentsOf: fileURL, encoding: .utf8)
-      return string
+      return try String(contentsOf: fileURL, encoding: .utf8)
     } catch {
       fatalError("Error: Failed to load string from \(fileURL): \(error)")
     }
@@ -77,8 +76,7 @@ extension XMLKitTestable {
       fatalError("Error: Could not find file \(resource).\(ext) in bundle.")
     }
     do {
-      let data = try Data(contentsOf: fileURL)
-      return data
+      return try Data(contentsOf: fileURL)
     } catch {
       fatalError("Error: Failed to load data from \(fileURL): \(error)")
     }

@@ -1,7 +1,7 @@
 //
 // XMLHeaderTests.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import XMLKit
 @Suite("XMLHeader")
 struct XMLHeaderTests: XMLKitTestable {
   @Test
-  func `default`() throws {
+  func `default`() {
     // Given
     let header: XMLHeader = .default
     let expected = """
@@ -42,7 +42,7 @@ struct XMLHeaderTests: XMLKitTestable {
   }
 
   @Test
-  func version() throws {
+  func version() {
     // Given
     let header: XMLHeader = .init(version: "1.1")
     let expected = """
@@ -57,7 +57,7 @@ struct XMLHeaderTests: XMLKitTestable {
   }
 
   @Test
-  func encoding() throws {
+  func encoding() {
     // Given
     let header: XMLHeader = .init(encoding: .utf16)
     let expected = """
@@ -72,7 +72,7 @@ struct XMLHeaderTests: XMLKitTestable {
   }
 
   @Test
-  func isStandalone() throws {
+  func isStandalone() {
     // Given
     let header: XMLHeader = .init(version: "1.0", isStandalone: true)
     let expected = """

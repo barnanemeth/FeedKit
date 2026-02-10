@@ -1,7 +1,7 @@
 //
 // XMLReader.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -127,8 +127,7 @@ extension XMLReader: XMLParserDelegate {
             }
           )
         ]
-      )
-      )
+      ))
     } else if let node = stack.top(), node.isXhtml {
       // If inside an XHTML element, treat the current start element as plain text.
       node.text = node.text?.appending("<\(elementName)") ?? "<\(elementName)"
@@ -162,8 +161,7 @@ extension XMLReader: XMLParserDelegate {
               }
             )
           ]
-        )
-        )
+        ))
       }
     }
   }
@@ -222,8 +220,8 @@ extension XMLReader: XMLParserDelegate {
   }
 
   func parserDidEndDocument(
-    _: XMLParser)
-  {
+    _: XMLParser
+  ) {
     #if DEBUG
       if !isComplete {
         print("Parsing ended without reaching the root path.")
@@ -249,7 +247,7 @@ extension XMLReader: XMLParserDelegate {
 // MARK: - Encodings
 
 extension XMLReader {
-  // List of encodings used in XML feeds ordered by priority
+  /// List of encodings used in XML feeds ordered by priority
   private static let encodings: [String.Encoding] = [
     .utf8, // Most common encoding
     .isoLatin1, // ISO-8859-1 (Latin-1) is common for Western European languages

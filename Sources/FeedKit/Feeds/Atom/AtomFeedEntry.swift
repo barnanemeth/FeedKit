@@ -1,7 +1,7 @@
 //
 // AtomFeedEntry.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,8 @@ public struct AtomFeedEntry {
     rights: String? = nil,
     media: Media? = nil,
     youTube: YouTube? = nil,
-    dublinCore: DublinCore? = nil
+    dublinCore: DublinCore? = nil,
+    geoRSS: GeoRSSSimple? = nil
   ) {
     self.title = title
     self.summary = summary
@@ -63,6 +64,7 @@ public struct AtomFeedEntry {
     self.media = media
     self.youTube = youTube
     self.dublinCore = dublinCore
+    self.geoRSS = geoRSS
   }
 
   // MARK: Public
@@ -210,6 +212,8 @@ public struct AtomFeedEntry {
   ///
   /// See https://tools.ietf.org/html/rfc5013
   public var dublinCore: DublinCore?
+
+  public var geoRSS: GeoRSSSimple?
 }
 
 // MARK: - Sendable
@@ -243,6 +247,7 @@ extension AtomFeedEntry: Codable {
     case media
     case youTube = "yt"
     case dublinCore = "dc"
+    case geoRSS = "georss"
   }
 
   public init(from decoder: any Decoder) throws {
@@ -260,9 +265,10 @@ extension AtomFeedEntry: Codable {
     published = try container.decodeIfPresent(Date.self, forKey: CodingKeys.published)
     source = try container.decodeIfPresent(AtomFeedSource.self, forKey: CodingKeys.source)
     rights = try container.decodeIfPresent(String.self, forKey: CodingKeys.rights)
-    media = try container.decodeIfPresent(Media.self, forKey: .media)
-    youTube = try container.decodeIfPresent(YouTube.self, forKey: .youTube)
+    media = try container.decodeIfPresent(Media.self, forKey: CodingKeys.media)
+    youTube = try container.decodeIfPresent(YouTube.self, forKey: CodingKeys.youTube)
     dublinCore = try container.decodeIfPresent(DublinCore.self, forKey: CodingKeys.dublinCore)
+    geoRSS = try container.decodeIfPresent(GeoRSSSimple.self, forKey: CodingKeys.geoRSS)
   }
 
   public func encode(to encoder: any Encoder) throws {
@@ -283,5 +289,6 @@ extension AtomFeedEntry: Codable {
     try container.encodeIfPresent(media, forKey: CodingKeys.media)
     try container.encodeIfPresent(youTube, forKey: CodingKeys.youTube)
     try container.encodeIfPresent(dublinCore, forKey: CodingKeys.dublinCore)
+    try container.encodeIfPresent(geoRSS, forKey: CodingKeys.geoRSS)
   }
 }

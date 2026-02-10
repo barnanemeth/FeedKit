@@ -1,7 +1,7 @@
 //
 // RSSFeedItem.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,6 +38,7 @@ public struct RSSFeedItem {
     title: String? = nil,
     link: String? = nil,
     description: String? = nil,
+    markdown: String? = nil,
     author: String? = nil,
     categories: [RSSFeedCategory]? = nil,
     comments: String? = nil,
@@ -48,11 +49,14 @@ public struct RSSFeedItem {
     dublinCore: DublinCore? = nil,
     content: Content? = nil,
     iTunes: ITunes? = nil,
-    media: Media? = nil
+    media: Media? = nil,
+    podcast: Podcast? = nil,
+    geoRSS: GeoRSSSimple? = nil
   ) {
     self.title = title
     self.link = link
     self.description = description
+    self.markdown = markdown
     self.author = author
     self.categories = categories
     self.comments = comments
@@ -64,6 +68,8 @@ public struct RSSFeedItem {
     self.content = content
     self.iTunes = iTunes
     self.media = media
+    self.podcast = podcast
+    self.geoRSS = geoRSS
   }
 
   // MARK: Public
@@ -84,6 +90,11 @@ public struct RSSFeedItem {
   /// week was about the way that the arrival of the stars at the Palazzo del
   /// Cinema was being staged.
   public var description: String?
+
+  /// The markdown content for the item.
+  ///
+  /// Example: ## Highlights
+  public var markdown: String?
 
   /// Email address of the author of the item.
   ///
@@ -223,6 +234,12 @@ public struct RSSFeedItem {
   /// Media RSS is a new RSS module that supplements the <enclosure>
   /// capabilities of RSS 2.0.
   public var media: Media?
+
+  /// Podcast namespace provides podcast-specific metadata and extensions.
+  /// See https://github.com/Podcastindex-org/podcast-namespace
+  public var podcast: Podcast?
+
+  public var geoRSS: GeoRSSSimple?
 }
 
 // MARK: - Sendable
@@ -244,6 +261,7 @@ extension RSSFeedItem: Codable {
     case title
     case link
     case description
+    case markdown = "source:markdown"
     case author
     case category
     case comments
@@ -255,6 +273,8 @@ extension RSSFeedItem: Codable {
     case content
     case iTunes = "itunes"
     case media
+    case podcast
+    case geoRSS = "georss"
   }
 
   public init(from decoder: any Decoder) throws {
@@ -263,6 +283,7 @@ extension RSSFeedItem: Codable {
     title = try container.decodeIfPresent(String.self, forKey: CodingKeys.title)
     link = try container.decodeIfPresent(String.self, forKey: CodingKeys.link)
     description = try container.decodeIfPresent(String.self, forKey: CodingKeys.description)
+    markdown = try container.decodeIfPresent(String.self, forKey: CodingKeys.markdown)
     author = try container.decodeIfPresent(String.self, forKey: CodingKeys.author)
     categories = try container.decodeIfPresent([RSSFeedCategory].self, forKey: CodingKeys.category)
     comments = try container.decodeIfPresent(String.self, forKey: CodingKeys.comments)
@@ -274,6 +295,8 @@ extension RSSFeedItem: Codable {
     content = try container.decodeIfPresent(Content.self, forKey: CodingKeys.content)
     iTunes = try container.decodeIfPresent(ITunes.self, forKey: CodingKeys.iTunes)
     media = try container.decodeIfPresent(Media.self, forKey: CodingKeys.media)
+    podcast = try container.decodeIfPresent(Podcast.self, forKey: CodingKeys.podcast)
+    geoRSS = try container.decodeIfPresent(GeoRSSSimple.self, forKey: CodingKeys.geoRSS)
   }
 
   public func encode(to encoder: any Encoder) throws {
@@ -282,6 +305,7 @@ extension RSSFeedItem: Codable {
     try container.encodeIfPresent(title, forKey: CodingKeys.title)
     try container.encodeIfPresent(link, forKey: CodingKeys.link)
     try container.encodeIfPresent(description, forKey: CodingKeys.description)
+    try container.encodeIfPresent(markdown, forKey: CodingKeys.markdown)
     try container.encodeIfPresent(author, forKey: CodingKeys.author)
     try container.encodeIfPresent(categories, forKey: CodingKeys.category)
     try container.encodeIfPresent(comments, forKey: CodingKeys.comments)
@@ -293,5 +317,7 @@ extension RSSFeedItem: Codable {
     try container.encodeIfPresent(content, forKey: CodingKeys.content)
     try container.encodeIfPresent(iTunes, forKey: CodingKeys.iTunes)
     try container.encodeIfPresent(media, forKey: CodingKeys.media)
+    try container.encodeIfPresent(podcast, forKey: CodingKeys.podcast)
+    try container.encodeIfPresent(geoRSS, forKey: CodingKeys.geoRSS)
   }
 }

@@ -1,7 +1,7 @@
 //
 // SampleTests.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ struct SampleTests: XMLKitTestable {
   }
 
   @Test
-  func xmlString() throws {
+  func xmlString() {
     // Given
     let data = data(resource: "Sample", withExtension: "xml")
     let expected: String = .init(decoding: data, as: Unicode.UTF8.self)
@@ -76,7 +76,7 @@ struct SampleTests: XMLKitTestable {
 
     // When
     let sampleDocument = try encoder.encode(value: sampleMock)
-    let actual = try decoder.decode(Sample.self, from: sampleDocument.root!)
+    let actual = try decoder.decode(Sample.self, from: #require(sampleDocument.root))
 
     // Then
     #expect(expected == actual)

@@ -1,7 +1,7 @@
 //
 // FeedTests + Mocks.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -184,7 +184,8 @@ extension FeedTests {
             text: "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><i>[Update: The Atom draft is finished.]</i></p></div>",
             attributes: .init(
               type: "xhtml",
-              src: "http://www.example.org/"
+              src: "http://www.example.org/",
+              base: "http://diveintomark.org/"
             )
           ),
           published: RFC3339DateFormatter().date(from: "2003-12-13T08:29:29-04:00"),

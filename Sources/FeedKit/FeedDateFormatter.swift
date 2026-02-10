@@ -1,7 +1,7 @@
 //
 // FeedDateFormatter.swift
 //
-// Copyright (c) 2016 - 2025 Nuno Dias
+// Copyright (c) 2016 - 2026 Nuno Dias
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,13 +44,17 @@ class PermissiveDateFormatter: DateFormatter, @unchecked Sendable {
   // MARK: Internal
 
   /// Array of date formats to try when converting from string to date.
-  var dateFormats: [String] { [] }
+  var dateFormats: [String] {
+    []
+  }
 
   /// Array of date formats to try when converting from string to date.
   /// Used in permissive parsing strategies when feeds are not fully
   /// compliant with the specification and multiple formats need to be
   /// attempted to ensure proper date parsing.
-  var permissiveDateFormats: [String] { [] }
+  var permissiveDateFormats: [String] {
+    []
+  }
 
   /// Attempts to parse a string into a Date using available formats.
   override func date(from string: String) -> Date? {
