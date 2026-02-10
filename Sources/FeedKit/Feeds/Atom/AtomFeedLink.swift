@@ -33,7 +33,7 @@ public struct AtomFeedLinkAttributes: Codable, Equatable, Hashable, Sendable {
     type: String? = nil,
     hreflang: String? = nil,
     title: String? = nil,
-    length: Int64? = nil
+    length: Double? = nil
   ) {
     self.href = href
     self.rel = rel
@@ -130,7 +130,7 @@ public struct AtomFeedLinkAttributes: Codable, Equatable, Hashable, Sendable {
   /// override the actual content length of the representation as reported
   /// by the underlying protocol.  Link elements MAY have a length
   /// attribute.
-  public var length: Int64?
+  public var length: Double?
 }
 
 /// The "atom:link" element defines a reference from an entry or feed to

@@ -29,7 +29,7 @@ public struct RSSFeedEnclosureAttributes: Codable, Equatable, Hashable, Sendable
 
   public init(
     url: String? = nil,
-    length: Int64? = nil,
+    length: Double? = nil,
     type: String? = nil
   ) {
     self.url = url
@@ -47,7 +47,7 @@ public struct RSSFeedEnclosureAttributes: Codable, Equatable, Hashable, Sendable
   /// How big the media object is in bytes.
   ///
   /// Example: 12216320
-  public var length: Int64?
+  public var length: Double?
 
   /// Standard MIME type.
   ///
